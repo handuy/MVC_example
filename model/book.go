@@ -57,3 +57,14 @@ func (b *BookService) CreateBook(book *Book) error {
 	}
 	return nil
 }
+
+// Update test update các trường hợp
+func (b *BookService) Update(book *Book, rawQueryWhere string, whereParams []interface{}, columnUpdate []string) error {
+
+	_, err := b.DB.Model(book).Column(columnUpdate...).Where(rawQueryWhere, whereParams...).Update()
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	return nil
+}

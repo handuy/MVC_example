@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"git.hocngay.com/new-techmaster-admin-iris/helper"
+	"git.hocngay.com/techmaster-example/helper"
 )
 
 type Config struct {

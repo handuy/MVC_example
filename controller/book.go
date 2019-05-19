@@ -2,6 +2,7 @@ package controller
 
 import (
 	"log"
+	"time"
 
 	"git.hocngay.com/techmaster-example/model"
 	"github.com/kataras/iris"
@@ -12,14 +13,13 @@ func (c *Controller) About(ctx iris.Context) {
 
 	books = c.BookService.GetBooks()
 
-	log.Println(books)
 	ctx.ViewData("books", books)
 	ctx.View("book/index.html")
 }
 
 func (c *Controller) Create(ctx iris.Context) {
 	lastBookId := c.BookService.GetLastBookId()
-	
+
 	var book model.Book
 	book.Id = lastBookId + 1
 	book.Name = "HTML"
@@ -31,6 +31,22 @@ func (c *Controller) Create(ctx iris.Context) {
 		log.Println(err)
 		return
 	}
-	
+
+	ctx.Redirect("/about")
+}
+
+func (c *Controller) Update(ctx iris.Context) {
+	lastBookId := c.BookService.GetLastBookId()
+	var book model.Book
+	book.Id = lastBookId
+	book.Category = time.Now().String()
+	book.Name = "HTML"
+
+	err := c.BookService.Update(&book, "")
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
 	ctx.Redirect("/about")
 }
