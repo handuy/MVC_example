@@ -7,4 +7,5 @@ import (
 
 func DemoRoutes(c *controller.Controller, api iris.Party) {
 	api.Get("/about", c.About)
+	api.Post("/create", c.Create)
 }

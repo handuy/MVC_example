@@ -1,0 +1,8 @@
+{
+    "database": {
+      "user": "postgres",
+      "password": "123",
+      "database": "postgres",
+      "address": "localhost:5432"
+    }
+}
