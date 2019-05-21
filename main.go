@@ -26,12 +26,8 @@ func main() {
 	dbConfig := config.Database
 	db := model.ConnectDb(dbConfig.User, dbConfig.Password, dbConfig.Database, dbConfig.Address)
 	defer db.Close()
+	c.DB = db
 	setupDatabase(db, config)
-	bookService, err := model.NewBookService(db)
-	if err != nil {
-		panic(err)
-	}
-	c.BookService = bookService
 
 	//Khởi tạo app iris
 	app := iris.New()

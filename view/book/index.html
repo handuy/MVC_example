@@ -1,20 +1,24 @@
-{{range .books}}
+{{range .classes}}
 
         {{.Id}}
 
         {{.Name}}
  
-        {{.Author}}
+        {{.Type}}
 
-        {{.Category}}
+        {{.ClassStatus}}
 
         <br>
 {{end}}
 
-<!-- <form method="POST" action="/update">
-    <button type="submit">Sua sách</button>
-</form> -->
+<form method="POST" action="/create">
+    <button type="submit">Thêm lớp</button>
+</form>
+
+<form method="POST" action="/update">
+    <button type="submit">Sửa lớp</button>
+</form>
 
 <form method="POST" action="/delete">
-    <button type="submit">Xoa sách</button>
+    <button type="submit">Xóa lớp</button>
 </form>

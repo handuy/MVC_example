@@ -23,7 +23,7 @@ func ConnectDb(user string, password string, database string, address string) (d
 //
 func MigrationDb(db *pg.DB, config config.Config) error {
 	// Tạo schema
-	var schemas = []string{"book"}
+	var schemas = []string{"public"}
 	for _, schema := range schemas {
 		_, err := db.Exec("CREATE SCHEMA IF NOT EXISTS " + schema + ";")
 		if err != nil {
@@ -31,14 +31,8 @@ func MigrationDb(db *pg.DB, config config.Config) error {
 		}
 	}
 
-	var book Book
-	err := createTable(&book, "book", "books", db, config)
-	if err != nil {
-		return err
-	}
-
-	var lesson LessonContent
-	err = createTable(&lesson, "book", "lesson_content", db, config)
+	var class Class
+	err := createTable(&class, "public", "class", db, config)
 	if err != nil {
 		return err
 	}

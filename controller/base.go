@@ -2,13 +2,14 @@ package controller
 
 import (
 	"git.hocngay.com/techmaster-example/config"
-	"git.hocngay.com/techmaster-example/model"
+	"github.com/go-pg/pg"
 )
 
 type Controller struct {
 	// Configuration
 	Config config.Config
-	BookService        *model.BookService
+	// DB instance
+	DB *pg.DB
 }
 
 func NewController() *Controller {
