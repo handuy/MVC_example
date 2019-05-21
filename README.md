@@ -1,6 +1,7 @@
 # Cấu trúc thư mục
 
-1. model
+1. vendor/git.hocngay.com/model-package
+- Phần code định nghĩa model được tách thành một package riêng và import vào trong vendor, có thể tái sử dụng ở các project khác nhau (admin, anonymous, user, teacher)
 - Là nơi định nghĩa struct tạo bảng và các method tương ứng của từng struct. Các method này thực hiện các CRUD operation lên bảng tương ứng
 - Với một số method CUD, trước khi chọc vào database thì sẽ có logic validate dữ liệu.
 Ví dụ:

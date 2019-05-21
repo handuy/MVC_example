@@ -3,7 +3,6 @@ package model
 import (
 	"errors"
 
-	"git.hocngay.com/techmaster-example/constant"
 	"github.com/go-pg/pg/orm"
 	"github.com/rs/xid"
 )
@@ -23,6 +22,8 @@ type Class struct {
 	ClassStatus int32 `json:"class_status" sql:"default:1"`
 	// Số buổi học, với lớp online thì số buổi học = 0
 	Sessions int32 `json:"sessions" sql:"default:0"`
+	// Số sinh viên
+	Students int32 `json:"students" sql:"default:0"`
 }
 
 func (class Class) GetClasses(DB orm.DB) ([]Class, error) {
@@ -51,10 +52,10 @@ func (class Class) InsertClass(DB orm.DB) error {
 	if class.CourseId == "" {
 		return errors.New("Lớp học chưa liên kết đến một khoá học cụ thể")
 	}
-	if class.Type != constant.CLASS_OFFLINE && class.Type != constant.CLASS_ONLINE {
+	if class.Type != CLASS_OFFLINE && class.Type != CLASS_ONLINE {
 		return errors.New("Hình thức lớp không hợp lệ")
 	}
-	if class.Type == constant.CLASS_OFFLINE {
+	if class.Type == CLASS_OFFLINE {
 		if class.Sessions <= 0 {
 			return errors.New("Số buổi học phải lớn hơn 0")
 		}
@@ -64,7 +65,7 @@ func (class Class) InsertClass(DB orm.DB) error {
 
 	// Insert dữ liệu
 	class.Id = xid.New().String()
-	class.ClassStatus = constant.OPEN_STATUS
+	class.ClassStatus = OPEN_STATUS
 	err := DB.Insert(&class)
 	if err != nil {
 		return err
@@ -81,10 +82,10 @@ func (class Class) UpdateClass(DB orm.DB) error {
 	if class.CourseId == "" {
 		return errors.New("Lớp học chưa liên kết đến một khoá học cụ thể")
 	}
-	if class.Type != constant.CLASS_OFFLINE && class.Type != constant.CLASS_ONLINE {
+	if class.Type != CLASS_OFFLINE && class.Type != CLASS_ONLINE {
 		return errors.New("Hình thức lớp không hợp lệ")
 	}
-	if class.Type == constant.CLASS_OFFLINE {
+	if class.Type == CLASS_OFFLINE {
 		if class.Sessions <= 0 {
 			return errors.New("Số buổi học phải lớn hơn 0")
 		}

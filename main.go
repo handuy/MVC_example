@@ -5,7 +5,7 @@ import (
 
 	"git.hocngay.com/techmaster-example/config"
 	"git.hocngay.com/techmaster-example/controller"
-	"git.hocngay.com/techmaster-example/model"
+	model_package "git.hocngay.com/model-package"
 	"git.hocngay.com/techmaster-example/router"
 	"github.com/go-pg/pg"
 	"github.com/kataras/iris"
@@ -24,7 +24,7 @@ func main() {
 
 	// Kết nối CSDL
 	dbConfig := config.Database
-	db := model.ConnectDb(dbConfig.User, dbConfig.Password, dbConfig.Database, dbConfig.Address)
+	db := model_package.ConnectDb(dbConfig.User, dbConfig.Password, dbConfig.Database, dbConfig.Address)
 	defer db.Close()
 	c.DB = db
 	setupDatabase(db, config)
@@ -52,10 +52,10 @@ func setupDatabase(db *pg.DB, config config.Config) {
 	argsWithProg := os.Args
 	if len(argsWithProg) > 1 && os.Args[1] == "release" {
 	} else {
-		model.LogQueryToConsole(db)
+		model_package.LogQueryToConsole(db)
 	}
 
-	err := model.MigrationDb(db, config)
+	err := model_package.MigrationDb(db, config)
 	if err != nil {
 		panic(err)
 	}

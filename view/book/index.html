@@ -4,15 +4,16 @@
 
         {{.Name}}
  
-        {{.Type}}
-
-        {{.ClassStatus}}
-
+        {{.Students}}
         <br>
 {{end}}
 
 <form method="POST" action="/create">
     <button type="submit">Thêm lớp</button>
+</form>
+
+<form method="POST" action="/add-student">
+    <button type="submit">Thêm học viên vào lớp</button>
 </form>
 
 <form method="POST" action="/update">
