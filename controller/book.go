@@ -42,7 +42,22 @@ func (c *Controller) Update(ctx iris.Context) {
 	book.Category = time.Now().String()
 	book.Name = "HTML"
 
-	err := c.BookService.Update(&book, "")
+	// err := c.BookService.Update(&book, "")
+	// if err != nil {
+	// 	log.Println(err)
+	// 	return
+	// }
+
+	ctx.Redirect("/about")
+}
+
+func (c *Controller) Delete(ctx iris.Context) {
+	var lesson model.LessonContent
+	lesson.LessonId = "1"
+	lesson.ContentId = "2"
+	lesson.ContentType = "Update nhieu cot"
+
+	err := c.BookService.DeleteLesson(&lesson)
 	if err != nil {
 		log.Println(err)
 		return

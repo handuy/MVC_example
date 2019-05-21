@@ -37,6 +37,12 @@ func MigrationDb(db *pg.DB, config config.Config) error {
 		return err
 	}
 
+	var lesson LessonContent
+	err = createTable(&lesson, "book", "lesson_content", db, config)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 

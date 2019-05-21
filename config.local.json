@@ -1,8 +1,8 @@
 {
     "database": {
-      "user": "postgres",
-      "password": "123456",
-      "database": "postgres",
-      "address": "localhost:5432"
+      "user": "code123",
+      "password": "Hermes3.141-",
+      "database": "code123",
+      "address": "45.118.144.97:10004"
     }
 }

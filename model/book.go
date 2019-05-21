@@ -12,6 +12,20 @@ type Book struct {
 	Name      string `json:"name"`
 	Author    string `json:"author"`
 	Category  string `json:"category"`
+	
+}
+
+type LessonContent struct {
+	// Tạo bảng
+	TableName []byte `json:"table_name" sql:"book.lesson_content"`
+	// Id của item
+	LessonId string `json:"lesson_id" sql:",pk"`
+	// Id của item
+	ContentId string `json:"content_id" sql:",pk"`
+	// Loại content: text, slide, video, file, problem, quiz_list, exercise
+	ContentType string `json:"content_type"`
+	// Text
+	Text string `json:"text"`
 }
 
 type BookService struct {
@@ -62,6 +76,17 @@ func (b *BookService) CreateBook(book *Book) error {
 func (b *BookService) Update(book *Book, rawQueryWhere string, whereParams []interface{}, columnUpdate []string) error {
 
 	_, err := b.DB.Model(book).Column(columnUpdate...).Where(rawQueryWhere, whereParams...).Update()
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	return nil
+}
+
+// Update test update các trường hợp
+func (b *BookService) DeleteLesson(lesson *LessonContent) error {
+
+	_, err := b.DB.Model(lesson).WherePK().Update()
 	if err != nil {
 		log.Println(err)
 		return err
